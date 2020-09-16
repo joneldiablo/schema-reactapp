@@ -1,0 +1,190 @@
+{
+  "site": "Easy Commerce",
+  "decription": "eCommerce easy and fast!!!!",
+  "icon": "icon.ico",
+  "logo": "logo.png",
+  "domain": "eltianguisonline.com",
+  "api": "api/",
+  "assets": {
+    "images": "assets/images",
+    "icons": "assets/icons",
+    "videos": "assets/videos",
+    "audios": "assets/audios",
+    "fonts": "assets/fonts",
+    "files": "assets/files"
+  },
+  "theme": "$themes.easy-commerce",
+  "sections": {
+    "header": {
+      "type": "header",
+      "name": "Header",
+      "description": "Header of site, always at top.",
+      "icon": "header",
+      "attributes": {
+        "site": "$site",
+        "logo": "$logo",
+        "description": "$description",
+        "fixed": true,
+        "menu": "$menus.main"
+      }
+    },
+    "content": {
+      "type": "container",
+      "name": "Content",
+      "description": "Wrap content of page.",
+      "icon": "content"
+    },
+    "footer": {
+      "type": "footer",
+      "name": "Footer",
+      "description": "Footer of site, always at bottom.",
+      "icon": "footer",
+      "attributes": {
+        "fixed": true,
+        "menu": "$menus.footer"
+      }
+    },
+    "hero": {
+      "name": "Hero",
+      "type": "hero",
+      "description": "First impresive image or banner container, wellcome to the site."
+    },
+    "signin-form": {
+      "type": "form",
+      "name": "Sign In",
+      "attributes": {
+        "user": {},
+        "password": {},
+        "remember-me": {}
+      }
+    },
+    "signup-form": {
+      "user": {},
+      "password": {},
+      "acept-terms": {}
+    }
+  },
+  "menus": {
+    "main": [
+      "$routes.home",
+      "$routes.about",
+      "$routes.contact"
+    ],
+    "footer": [
+      "$routes.home",
+      "$routes.about",
+      "$routes.contact",
+      "$routes.blog",
+      "$routes.privacy-terms"
+    ],
+    "social-networks": [
+      {
+        "label": "Facebook",
+        "value": "https://facebook.com",
+        "icon": "./assets/icons/facebook.svg"
+      },
+      {
+        "label": "Twitter",
+        "value": "https://twitter.com",
+        "icon": "./assets/icons/twitter.svg"
+      },
+      {
+        "label": "YouTube",
+        "value": "https://youtube.com",
+        "icon": "./assets/icons/youtube.svg"
+      }
+    ]
+  },
+  "templates": {
+    "public": [
+      "$sections.header",
+      "$sections.content",
+      "$sections.footer"
+    ],
+    "access": [
+      {
+        "section": "$sections.content",
+        "attributes": {
+          "type": "card"
+        }
+      }
+    ]
+  },
+  "pages": {
+    "home": [
+      "$sections.hero",
+      {
+        "section": "$sections.service",
+        "attributes": {
+          "service": "sections/wellcome"
+        }
+      },
+      {
+        "section": "$sections.slider",
+        "attributes": {
+          "type": "cards-vertical",
+          "show": 2,
+          "service": "products/categories",
+          "filters": {
+            "limit": 5,
+            "featured": true
+          }
+        }
+      },
+      {
+        "section": "$sections.slider",
+        "attributes": {
+          "service": "products",
+          "filters": {
+            "limit": 3,
+            "featured": true
+          }
+        }
+      }
+    ],
+    "catalog": [],
+    "item": [],
+    "cart": [],
+    "checkout": [],
+    "purchase-done": [],
+    "purchase-error": [],
+    "error": [],
+    "not-found": [],
+    "contact": [],
+    "signin": [],
+    "signup": [],
+    "password": []
+  },
+  "routes": [
+    {
+      "template": "$templates.public",
+      "children": {
+        "/": "$pages.home",
+        "/about": "$pages.about",
+        "/catalog": "$pages.catalog",
+        "/contact": "$pages.contact"
+      }
+    },
+    {
+      "template": "$templates.access",
+      "children": {
+        "/signin": {
+          "content": "$pages.signin",
+          "children": {
+            "/reset-password": "$pages.password"
+          }
+        },
+        "/signup": "$pages.signup"
+      }
+    }
+  ],
+  "themes": {
+    "easy-commerce": {
+      "base": "default",
+      "name": "Easy Commerce bs theme",
+      "style": "",
+      "variables": {},
+      "fonts": []
+    }
+  }
+}
