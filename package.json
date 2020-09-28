@@ -1,0 +1,34 @@
+{
+  "name": "schema-reactapp",
+  "version": "1.0.0",
+  "description": "Create a complete web application or website with a schema file, add components and more, in development!!!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joneldiablo/schema-reactapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joneldiablo/schema-reactapp/issues"
+  },
+  "homepage": "https://github.com/joneldiablo/schema-reactapp#readme",
+  "dependencies": {
+    "react-router-dom": "^5.2.0",
+    "url-join": "^4.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@storybook/addon-actions": "^6.0.22",
+    "@storybook/addon-links": "^6.0.22",
+    "@storybook/addons": "^6.0.22",
+    "@storybook/react": "^6.0.22",
+    "babel-loader": "^8.1.0"
+  }
+}

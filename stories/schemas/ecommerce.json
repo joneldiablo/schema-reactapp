@@ -5,6 +5,7 @@
   "logo": "logo.png",
   "domain": "eltianguisonline.com",
   "api": "api/",
+  "theme": "$themes.easy-commerce",
   "assets": {
     "images": "assets/images",
     "icons": "assets/icons",
@@ -13,7 +14,6 @@
     "fonts": "assets/fonts",
     "files": "assets/files"
   },
-  "theme": "$themes.easy-commerce",
   "sections": {
     "header": {
       "type": "header",
@@ -53,15 +53,24 @@
       "type": "form",
       "name": "Sign In",
       "attributes": {
-        "user": {},
-        "password": {},
-        "remember-me": {}
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {},
+          "remember-me": {}
+        }
       }
     },
     "signup-form": {
-      "user": {},
-      "password": {},
-      "acept-terms": {}
+      "type": "form",
+      "name": "Sign Up",
+      "attributes": {
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {}
+        }
+      }
     }
   },
   "menus": {
@@ -103,9 +112,17 @@
     ],
     "access": [
       {
-        "section": "$sections.content",
+        "sections": "$sections.content",
         "attributes": {
           "type": "card"
+        }
+      }
+    ],
+    "document": [
+      {
+        "sections": "$sections.modal",
+        "attributes": {
+          "type": "document"
         }
       }
     ]
@@ -142,6 +159,7 @@
         }
       }
     ],
+    "about": [],
     "catalog": [],
     "item": [],
     "cart": [],
@@ -153,29 +171,114 @@
     "contact": [],
     "signin": [],
     "signup": [],
-    "password": []
+    "password": [],
+    "terms": [],
+    "privacy": [],
+    "survey": []
   },
   "routes": [
     {
-      "template": "$templates.public",
-      "children": {
-        "/": "$pages.home",
-        "/about": "$pages.about",
-        "/catalog": "$pages.catalog",
-        "/contact": "$pages.contact"
-      }
+      "template": "$templates.access",
+      "children": [
+        {
+          "path": "/signin",
+          "content": "$pages.signin",
+          "children": [
+            {
+              "path": "/reset-password",
+              "content": "$pages.password"
+            }
+          ]
+        },
+        {
+          "path": "/signup",
+          "content": "$pages.signup"
+        }
+      ]
     },
     {
-      "template": "$templates.access",
-      "children": {
-        "/signin": {
-          "content": "$pages.signin",
-          "children": {
-            "/reset-password": "$pages.password"
-          }
+      "template": "$templates.document",
+      "children": [
+        {
+          "path": [
+            "*/privacy",
+            "/privacy"
+          ],
+          "content": "$pages.privacy"
         },
-        "/signup": "$pages.signup"
-      }
+        {
+          "path": [
+            "*/terms",
+            "/terms"
+          ],
+          "content": "$pages.terms"
+        }
+      ]
+    },
+    {
+      "template": "$templates.public",
+      "children": [
+        {
+          "//ATENTION": "the default path must be in last object if not, desapear other paths!!!",
+          "path": "/",
+          "exact": true,
+          "content": "$pages.home"
+        },
+        {
+          "path": "/about",
+          "content": "$pages.about"
+        },
+        {
+          "template": "$templates.store",
+          "children": [
+            {
+              "path": "/catalog",
+              "content": "$pages.catalog",
+              "children": [
+                {
+                  "path": ":path",
+                  "content": "$pages.item"
+                }
+              ]
+            },
+            {
+              "path": "cart",
+              "content": "$pages.cart",
+              "children": [
+                {
+                  "path": "shipping",
+                  "content": "$pages.shipping"
+                },
+                {
+                  "path": "checkout",
+                  "exact": true,
+                  "content": "$pages.checkout"
+                },
+                {
+                  "path": "checkout/done",
+                  "content": "$pages.checkout-done"
+                },
+                {
+                  "path": "checkout/error",
+                  "content": "$pages.checkout-error"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/contact",
+          "content": "$pages.contact"
+        },
+        {
+          "path": "survey",
+          "content": "$pages.survey"
+        },
+        {
+          "path": "*",
+          "content": "$pages.not-found"
+        }
+      ]
     }
   ],
   "themes": {
