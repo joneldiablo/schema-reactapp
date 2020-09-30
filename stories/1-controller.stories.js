@@ -1,9 +1,39 @@
 import React from 'react';
-import Controller from "../src/controller";
+import { createHashHistory } from 'history';
+import { Router, Link } from "react-router-dom";
+import mapRoutes from "../src/map-routes";
+import { HashRouterController, RouterController } from "../src/controller";
+import 'bootstrap';
+import 'bootstrap/scss/bootstrap.scss';
+
+const schema = require('./schemas/ecommerce.json');
+const history = createHashHistory();
+const rs = mapRoutes(schema.routes);
+const Menu = () => <div>
+  <ul>
+    {Object.keys(rs).map(route =>
+      <li key={route}>
+        {rs[route]}
+        <Link to={route}>
+          <small>
+            &nbsp;({route})
+          </small>
+        </Link>
+      </li>
+    )}
+  </ul>
+  <hr />
+</div>
 
 export default {
-  title: 'Controller',
-  component: Controller,
+  title: 'Controller'
 };
 
-export const ecommerceDemo = () => <Controller />
+export const EcommerceCustomHistoryController = () => <Router history={history}>
+  <Menu />
+  <RouterController schema={schema} />
+</Router>
+
+export const EcommerceHashRouterController = () => <>
+  <HashRouterController schema={schema} />
+</>

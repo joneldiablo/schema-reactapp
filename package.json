@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./stories/assets -p 6006",
     "build-storybook": "build-storybook"
   },
   "repository": {
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/joneldiablo/schema-reactapp#readme",
   "dependencies": {
+    "deepmerge": "^4.2.2",
+    "react-imported-component": "^6.3.13",
     "react-router-dom": "^5.2.0",
     "url-join": "^4.0.1"
   },
@@ -28,7 +30,13 @@
     "@storybook/addon-actions": "^6.0.22",
     "@storybook/addon-links": "^6.0.22",
     "@storybook/addons": "^6.0.22",
+    "@storybook/preset-scss": "^1.0.2",
     "@storybook/react": "^6.0.22",
-    "babel-loader": "^8.1.0"
+    "babel-loader": "^8.1.0",
+    "bootstrap": "^5.0.0-alpha2",
+    "css-loader": "^4.3.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1"
   }
 }

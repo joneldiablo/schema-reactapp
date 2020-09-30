@@ -1,77 +1,83 @@
 import React from "react";
 import {
-  Router,
   HashRouter,
   BrowserRouter,
   Route,
   withRouter,
-  Link,
   Switch
 } from "react-router-dom";
 import urlJoin from "url-join";
+import mapRoutes from "./map-routes";
+import Template from "./template";
+import Page from "./page";
+import Section from "./section";
 
 export default class Controller extends React.Component {
 
   static defaultProps = {
-
+    schema: { routes: [] },
+    Template,
+    Page,
+    Section
   }
 
   state = {
-    mapRoutes: {}
+    mapRoutes: mapRoutes(this.props.schema.routes),
+    /*
+modificar para usar la funcion de remplazo de referencias en todos lados, hacer que los objetos mezclen, usar elemento "ref" si es necesario....
+sections: this.resolveRefs(this.props.schema.sections),
+templates: this.resolveRefs(this.props.schema.templates),
+routes: this.resolveRefs(this.props.schema.routes),
+menus: this.resolveRefs(this.props.schema.menus),
+pages: this.resolveRefs(this.props.schema.pages), */
   }
 
-  sections() {
-
-  }
-
-  pages(pageObj) {
-    if (typeof pageObj === 'string') {
-      let page = pageObj.replace('$pages.', '');
-      return this.props.schema.pages[page];
-    }
-    return pageObj;
-  }
-
-  menus() {
-
-  }
-
-  mapRoutes(schema, parent = '/') {
-    let type = Array.isArray(schema) ? 'array' : typeof schema;
-    let allPaths = {};
-    switch (type) {
-      case 'array': {
-        schema.forEach(route => {
-          Object.assign(allPaths, this.mapRoutes(route, parent));
-        });
-        break;
-      }
-      case 'object': {
-        let { content, children, path } = schema;
-        let url;
-        if (Array.isArray(path)) {
-          path.forEach(p => {
-            url = urlJoin(parent, p);
-            if (content) Object.assign(allPaths, this.mapRoutes(content, url));
-          });
-        } else {
-          url = urlJoin(parent, path || '/');
-          if (content) Object.assign(allPaths, this.mapRoutes(content, url));
-        }
-        if (children)
-          Object.assign(allPaths, this.mapRoutes(children, url));
-        break;
-      }
-      default: {
-        allPaths = {
-          [parent]: {
-            id: schema,
-            content: this.pages(schema)
+  resolveRefs(item) {
+    if (Array.isArray(item)) {
+      return item.map(a => this.resolveRefs(a));
+    } else if (typeof item === 'object') {
+      let toReturn = {};
+      Object.keys(item)
+        .forEach(k => {
+          if (k === 'ref') {
+            Object.assign(toReturn, this.resolveRefs(item[k]));
+            toReturn['id'] = item[k].substring(1).split('.').pop();
+          } else if (k === 'attributes') {
+            toReturn[k] = Object.assign(toReturn[k] || {}, this.resolveRefs(item[k]));
           }
-        };
-      }
-    }
-    return allPaths;
+          else toReturn[k] = this.resolveRefs(item[k])
+        });
+      return toReturn;
+    } else if (typeof item === 'string' && item[0] === '$') {
+      let { schema } = this.props;
+      let keys = item.substring(1).split('.');
+      let data = keys.reduce((obj, key) => obj[key], schema);
+      return this.resolveRefs(data);
+    } else return item;
+  }
+
+  pages(pageId) {
+    let page = this.resolveRefs(pageId) || [];
+    let { content } = page;
+    if (Array.isArray(page)) content = page;
+    let ThisPage = this.props.Page;
+    let ThisSection = this.props.Section;
+    return <ThisPage {...page}>
+      {content.map((item, i) => <ThisSection key={i} {...item} />)}
+    </ThisPage>
+  }
+
+  templates(templateId, children) {
+    let template = this.resolveRefs(templateId) || [];
+    let { content } = template;
+    if (Array.isArray(template)) content = template;
+    let ThisTemplate = this.props.Template;
+    let ThisSection = this.props.Section;
+    return <ThisTemplate {...template}>
+      {content.map((item, i) => {
+        return <ThisSection key={i} {...item} children={children} />
+      })}
+    </ThisTemplate>
   }
 
   getRoutes(schema, parent = '/', key) {
@@ -102,13 +108,15 @@ export default class Controller extends React.Component {
           key,
           exact
         }
-        return <Route {...props}>
-          <ul>
-            {template && <li>template: {template}</li>}
-            {content && <li>content: {content}</li>}
-            <li>path: {JSON.stringify(props.path)}</li>
-          </ul>
+        let childrenRoutes = <>
+          {content && this.pages(content)}
           {children && this.getRoutes(children, absPath)}
+        </>;
+        return <Route {...props}>
+          {template ?
+            this.templates(template, childrenRoutes) :
+            childrenRoutes
+          }
         </Route>
       }
       default:
@@ -117,30 +125,21 @@ export default class Controller extends React.Component {
   }
 
   render() {
-    const rs = this.mapRoutes(this.props.schema.routes);
-    const routes = this.getRoutes(this.props.schema.routes);
-    return <div>
-      <ul>
-        {Object.keys(rs).map(route =>
-          <li key={route}><Link to={route}>{rs[route].id}</Link></li>
-        )}
-      </ul>
-      <hr />
-      {routes}
-    </div>
+    return this.getRoutes(this.props.schema.routes);
   }
 }
 
 export const RouterController = (props) => {
-  return (<Router history={props.history}><Controller {...props} /></Router>);
+  let RController = withRouter(Controller);
+  return (<RController {...props} />);
 }
 
 export const BrowserRouterController = (props) => {
-  let RouterSchema = withRouter(Controller);
-  return (<BrowserRouter><RouterSchema {...props} /></BrowserRouter>);
+  let RController = withRouter(Controller);
+  return (<BrowserRouter><RController {...props} /></BrowserRouter>);
 }
 
 export const HashRouterController = (props) => {
-  let RouterSchema = withRouter(Controller);
-  return (<HashRouter><RouterSchema {...props} /></HashRouter>);
+  let RController = withRouter(Controller);
+  return (<HashRouter><RController {...props} /></HashRouter>);
 }
