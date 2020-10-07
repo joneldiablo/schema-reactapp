@@ -7,10 +7,12 @@ import {
   Switch
 } from "react-router-dom";
 import urlJoin from "url-join";
+import importedComponent from 'react-imported-component';
+import findComponent from "./find-component";
 import mapRoutes from "./map-routes";
-import Template from "./template";
-import Page from "./page";
-import Section from "./section";
+import Template from "./containers/template";
+import Page from "./containers/page";
+import Section from "./containers/section";
 
 export default class Controller extends React.Component {
 
@@ -56,6 +58,17 @@ pages: this.resolveRefs(this.props.schema.pages), */
     } else return item;
   }
 
+  components({ type, from } = {}) {
+    return importedComponent(() => {
+      let path = findComponent(type, true) || from;
+      // use the template string (`...`) because "import" function not working with variables
+      return import(`${path}`);
+    }, {
+      LoadingComponent: () => 'loading',
+      ErrorComponent: () => 'error'
+    })
+  }
+
   pages(pageId) {
     let page = this.resolveRefs(pageId) || [];
     let { content } = page;
@@ -63,7 +76,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let ThisPage = this.props.Page;
     let ThisSection = this.props.Section;
     return <ThisPage {...page}>
-      {content.map((item, i) => <ThisSection key={i} {...item} />)}
+      {content.map((item, i) => <ThisSection key={i} {...item} Component={this.components(item)} />)}
     </ThisPage>
   }
 
@@ -75,7 +88,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let ThisSection = this.props.Section;
     return <ThisTemplate {...template}>
       {content.map((item, i) => {
-        return <ThisSection key={i} {...item} children={children} />
+        return <ThisSection key={i} {...item} Component={this.components(item)} children={children} />
       })}
     </ThisTemplate>
   }

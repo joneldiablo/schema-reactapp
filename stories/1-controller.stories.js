@@ -3,6 +3,7 @@ import { createHashHistory } from 'history';
 import { Router, Link } from "react-router-dom";
 import mapRoutes from "../src/map-routes";
 import { HashRouterController, RouterController } from "../src/controller";
+import { Template, Page, Section } from "../src/editor-containers";
 import 'bootstrap';
 import 'bootstrap/scss/bootstrap.scss';
 
@@ -36,4 +37,8 @@ export const EcommerceCustomHistoryController = () => <Router history={history}>
 
 export const EcommerceHashRouterController = () => <>
   <HashRouterController schema={schema} />
+</>
+
+export const EcommerceEditorComponents = () => <>
+  <HashRouterController schema={schema} Template={Template} Page={Page} Section={Section} />
 </>

@@ -77,8 +77,7 @@
   "menus": {
     "main": [
       {
-        "label": "Inicio",
-        "path": "/",
+        "ref": "$pages.home",
         "exact": true
       },
       "$pages.about",
@@ -86,7 +85,10 @@
       "$pages.contact"
     ],
     "footer": [
-      "$pages.home",
+      {
+        "ref": "$pages.home",
+        "exact": true
+      },
       "$pages.about",
       "$pages.contact",
       "$pages.blog",
@@ -112,6 +114,7 @@
   },
   "templates": {
     "public": {
+      "type": "template",
       "label": "Public",
       "description": "template for all public website",
       "icon": "template",
@@ -148,16 +151,21 @@
         }
       }
     ],
-    "store": [
+    "store": {
+      "type": "template",
+      "label": "Store",
+      "content": [
       "$sections.catalog-filters",
       {
         "ref": "$sections.content",
         "allowChildren": true
       }
     ]
+  }
   },
   "pages": {
     "home": {
+      "type": "page",
       "label": "Inicio",
       "path": "/",
       "icon": "home",
@@ -196,6 +204,7 @@
       ]
     },
     "about": {
+      "type": "page",
       "label": "Quiénes Somos",
       "path": "/about",
       "icon": "about",
@@ -204,6 +213,7 @@
       "content": []
     },
     "catalog": {
+      "type": "page",
       "label": "Catálogo",
       "path": "/catalog",
       "icon": "catalog",
@@ -214,6 +224,7 @@
       ]
     },
     "item": {
+      "type": "page",
       "label": ":name",
       "path": "/:path",
       "icon": "item",
@@ -228,6 +239,7 @@
     "error": [],
     "not-found": [],
     "contact": {
+      "type": "page",
       "label": "Contacto",
       "path": "/contact",
       "icon": "contact",

@@ -1,4 +1,4 @@
-export default (type) => {
+export default (type, defaultComponent) => {
   switch (type) {
     case 'navbar':
       return './components/navbar';
@@ -9,6 +9,6 @@ export default (type) => {
     case 'footer':
       return './components/footer';
     default:
-      return './components/component';
+      return defaultComponent ? './components/component' : false;
   }
 }

@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { randomS4 } from "../functions";
 
-export default class Header extends React.Component {
-  id = this.props.type + '-' + randomS4();
+export default class Navbar extends React.Component {
+  id = this.constructor.name + '-' + randomS4();
   render() {
     let { logo, logoHeight, site, menu } = this.props;
 
