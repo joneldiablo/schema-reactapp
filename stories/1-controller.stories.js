@@ -1,11 +1,11 @@
 import React from 'react';
 import { createHashHistory } from 'history';
 import { Router, Link } from "react-router-dom";
-import mapRoutes from "../src/map-routes";
-import { HashRouterController, RouterController } from "../src/controller";
-import { Template, Page, Section } from "../src/editor-containers";
+import mapRoutes from "../src/js/map-routes";
+import { HashRouterController, RouterController } from "../src/js/controller";
+import { Template, Page, Section } from "../src/js/editor-containers";
 import 'bootstrap';
-import 'bootstrap/scss/bootstrap.scss';
+import '../src/scss/style.scss';
 
 const schema = require('./schemas/ecommerce.json');
 const history = createHashHistory();

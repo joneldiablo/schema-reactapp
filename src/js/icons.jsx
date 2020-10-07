@@ -1,6 +1,6 @@
 import React from "react";
 import IcoMoon from "react-icomoon";
-const selection = require('../icons/selection.json');
+const selection = require('../../icons/selection.json');
 
 export default class Icons extends React.Component {
   static defaultProps = {

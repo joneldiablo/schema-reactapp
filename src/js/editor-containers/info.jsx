@@ -18,7 +18,7 @@ export default class Info extends React.Component {
 
   render() {
     let { label, children } = this.props;
-    return <div style={this.style}>
+    return <div style={this.style} className="shadow-hover">
       <div className="clearfix">
         <button className="btn btn-sm btn-primary float-right rounded-circle" type="button" data-toggle="modal"
           data-target={'#' + this.id}><Icons icon="gear" /></button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from '../src/icons';
+import Icons from '../src/js/icons';
 const { icons } = require('../icons/selection.json');
 
 export default {

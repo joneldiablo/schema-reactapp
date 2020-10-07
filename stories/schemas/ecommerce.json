@@ -25,8 +25,9 @@
         "logo": "$logo",
         "logoHeight": 80,
         "description": "$description",
-        "sticky": true,
-        "menu": "$menus.main"
+        "menu": "$menus.main",
+        "menuLeft": "$menus.left",
+        "menuRight": "$menus.right"
       }
     },
     "container": {
@@ -41,7 +42,6 @@
       "description": "Footer of site, always at bottom.",
       "icon": "footer",
       "attributes": {
-        "fixed": true,
         "menu": "$menus.footer"
       }
     },
@@ -84,6 +84,14 @@
       "$pages.catalog",
       "$pages.contact"
     ],
+    "left": [
+      "$pages.about",
+      "$pages.contact"
+    ],
+    "right": [
+      "$pages.catalog",
+      "$pages.cart"
+    ],
     "footer": [
       {
         "ref": "$pages.home",
@@ -122,15 +130,26 @@
       "content": [
         {
           "ref": "$sections.header",
+          "background": "white",
+          "shadow": true,
+          "zIndex": 1,
           "attributes": {
-            "theme": "dark"
+            "centeredLogo": false,
+            "menuPosition": "right",
+            "textOverColor": "light"
           }
         },
         {
           "ref": "$sections.container",
           "allowChildren": true
         },
-        "$sections.footer"
+        {
+          "ref": "$sections.footer",
+          "background": "dark",
+          "attributes": {
+            "textOverColor": "dark"
+          }
+        }
       ]
     },
     "access": [
@@ -172,7 +191,10 @@
       "image": "images/home.jpg",
       "description": "lorem ipsum dollo",
       "content": [
-        "$sections.hero",
+        {
+          "ref": "$sections.hero",
+          "background": "primary"
+        },
         {
           "ref": "$sections.service",
           "attributes": {
@@ -232,7 +254,13 @@
       "description": ":description",
       "content": []
     },
-    "cart": [],
+    "cart": {
+      "type": "page",
+      "label": "Carrito",
+      "path": "/cart",
+      "icon": "cart",
+      "content": []
+    },
     "checkout": [],
     "purchase-done": [],
     "purchase-error": [],

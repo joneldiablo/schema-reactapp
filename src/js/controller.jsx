@@ -2,10 +2,10 @@ import React from "react";
 import {
   HashRouter,
   BrowserRouter,
-  Route,
   withRouter,
-  Switch
+  Route,
 } from "react-router-dom";
+import { AnimatedSwitch } from 'react-router-transition';
 import urlJoin from "url-join";
 import importedComponent from 'react-imported-component';
 import findComponent from "./find-component";
@@ -97,9 +97,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let type = Array.isArray(schema) ? 'array' : typeof schema;
     switch (type) {
       case 'array': {
-        return <Switch>
-          {schema.map((schemaItem, i) => this.getRoutes(schemaItem, parent, i))}
-        </Switch>
+        return schema.map((schemaItem, i) => this.getRoutes(schemaItem, parent, i));
       }
       case 'object': {
         const getThisPaths = (thisRoutes) => {
@@ -121,11 +119,22 @@ pages: this.resolveRefs(this.props.schema.pages), */
           key,
           exact
         }
+        let childrenProps = {
+          runOnMount: true,
+          atEnter: { offset: -100 },
+          atLeave: { offset: -100 },
+          atActive: { offset: 0 },
+          mapStyles: (styles) => ({
+            transform: `translateX(${styles.offset}%)`,
+          })
+        }
         let childrenRoutes = <>
           {content && this.pages(content)}
-          {children && this.getRoutes(children, absPath)}
+          {children && <AnimatedSwitch {...childrenProps}>
+            {this.getRoutes(children, absPath)}
+          </AnimatedSwitch>}
         </>;
-        return <Route {...props}>
+        return <Route {...props} >
           {template ?
             this.templates(template, childrenRoutes) :
             childrenRoutes
