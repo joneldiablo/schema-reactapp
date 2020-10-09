@@ -1,0 +1,10 @@
+.route-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+.route-wrapper > div {
+  grid-row-start: 1;
+  grid-column-start: 1;
+}

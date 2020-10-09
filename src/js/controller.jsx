@@ -13,6 +13,7 @@ import mapRoutes from "./map-routes";
 import Template from "./containers/template";
 import Page from "./containers/page";
 import Section from "./containers/section";
+import getTransition from "./transitions";
 
 export default class Controller extends React.Component {
 
@@ -25,6 +26,7 @@ export default class Controller extends React.Component {
 
   state = {
     mapRoutes: mapRoutes(this.props.schema.routes),
+    allRoutes: this.getRoutes(this.props.schema.routes)
     /*
 modificar para usar la funcion de remplazo de referencias en todos lados, hacer que los objetos mezclen, usar elemento "ref" si es necesario....
 sections: this.resolveRefs(this.props.schema.sections),
@@ -110,7 +112,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
             return urlJoin(parent, r.path || '')
           });
         }
-        let { template, content, children, path, exact } = schema;
+        let { template, content, children, path, exact, transition } = schema;
         let absPath = Array.isArray(path) ?
           path.map(p => urlJoin(parent, p))
           : urlJoin(parent, path || '/');
@@ -119,18 +121,9 @@ pages: this.resolveRefs(this.props.schema.pages), */
           key,
           exact
         }
-        let childrenProps = {
-          runOnMount: true,
-          atEnter: { offset: -100 },
-          atLeave: { offset: -100 },
-          atActive: { offset: 0 },
-          mapStyles: (styles) => ({
-            transform: `translateX(${styles.offset}%)`,
-          })
-        }
         let childrenRoutes = <>
           {content && this.pages(content)}
-          {children && <AnimatedSwitch {...childrenProps}>
+          {children && <AnimatedSwitch {...getTransition(transition)}>
             {this.getRoutes(children, absPath)}
           </AnimatedSwitch>}
         </>;
@@ -147,7 +140,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
   }
 
   render() {
-    return this.getRoutes(this.props.schema.routes);
+    return this.state.allRoutes;
   }
 }
 

@@ -9,7 +9,7 @@ export default class Section extends React.Component {
     background: false,//'light',
     shadow: false,//sm,lg
     textColor: false,//sm,lg
-    position: 'relative'
+    zIndex: false
   }
 
   id = this.constructor.name + '-' + randomS4();
@@ -17,8 +17,7 @@ export default class Section extends React.Component {
   render() {
     let { allowChildren, attributes,
       Component, sticky, fixed, zIndex,
-      background, shadow, textColor,
-      position } = this.props;
+      background, shadow, textColor } = this.props;
     let className = [
       this.constructor.name,
       sticky && 'sticky-top',
@@ -29,7 +28,7 @@ export default class Section extends React.Component {
     ].filter(c => c).join(' ');
     let style = {
       zIndex,
-      position
+      position: zIndex && 'relative'
     }
     return <section className={className} id={this.id} style={style}>
       <Component {...attributes}>
