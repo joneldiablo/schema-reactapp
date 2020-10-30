@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'diablo-icons';
-  src:  url('fonts/diablo-icons.eot?4qqk2c');
-  src:  url('fonts/diablo-icons.eot?4qqk2c#iefix') format('embedded-opentype'),
-    url('fonts/diablo-icons.ttf?4qqk2c') format('truetype'),
-    url('fonts/diablo-icons.woff?4qqk2c') format('woff'),
-    url('fonts/diablo-icons.svg?4qqk2c#diablo-icons') format('svg');
+  src:  url('fonts/diablo-icons.eot?7h7srb');
+  src:  url('fonts/diablo-icons.eot?7h7srb#iefix') format('embedded-opentype'),
+    url('fonts/diablo-icons.ttf?7h7srb') format('truetype'),
+    url('fonts/diablo-icons.woff?7h7srb') format('woff'),
+    url('fonts/diablo-icons.svg?7h7srb#diablo-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -46,8 +46,14 @@ i {
 .icon-star-o:before {
   content: "\f006";
 }
+.icon-user-circle:before {
+  content: "\f2bd";
+}
 .icon-user:before {
   content: "\f007";
+}
+.icon-groups:before {
+  content: "\f0c0";
 }
 .icon-image:before {
   content: "\f03e";
@@ -198,4 +204,31 @@ i {
 }
 .icon-map-marker:before {
   content: "\f041";
+}
+.icon-clipboard:before {
+  content: "\e904";
+}
+.icon-note-list:before {
+  content: "\e905";
+}
+.icon-file-text:before {
+  content: "\e906";
+}
+.icon-orders:before {
+  content: "\e907";
+}
+.icon-catalog:before {
+  content: "\e908";
+}
+.icon-coupon:before {
+  content: "\e909";
+}
+.icon-eye:before {
+  content: "\f06e";
+}
+.icon-pencil:before {
+  content: "\f040";
+}
+.icon-pencil-square-o:before {
+  content: "\f044";
 }

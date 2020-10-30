@@ -1,0 +1,24 @@
+@import "../variables";
+
+.nav-side {
+  * {
+    transition: 0.3s;
+  }
+  .nav-link {
+    color: $secondary;
+  }
+  .nav-link.active {
+    background-color: $secondary;
+    color: $white;
+  }
+  .text-collapse {
+    max-width: 0;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  &:hover .text-collapse {
+    max-width: 100%;
+    padding-left: 10px;
+  }
+}

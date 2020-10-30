@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?4qqk2c');
-  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?4qqk2c#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?4qqk2c') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?4qqk2c') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?4qqk2c##{$icomoon-font-family}') format('svg');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?7h7srb');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?7h7srb#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?7h7srb') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?7h7srb') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?7h7srb##{$icomoon-font-family}') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -62,9 +62,19 @@ i {
     content: $icon-star-o; 
   }
 }
+.icon-user-circle {
+  &:before {
+    content: $icon-user-circle; 
+  }
+}
 .icon-user {
   &:before {
     content: $icon-user; 
+  }
+}
+.icon-groups {
+  &:before {
+    content: $icon-groups; 
   }
 }
 .icon-image {
@@ -315,6 +325,51 @@ i {
 .icon-map-marker {
   &:before {
     content: $icon-map-marker; 
+  }
+}
+.icon-clipboard {
+  &:before {
+    content: $icon-clipboard; 
+  }
+}
+.icon-note-list {
+  &:before {
+    content: $icon-note-list; 
+  }
+}
+.icon-file-text {
+  &:before {
+    content: $icon-file-text; 
+  }
+}
+.icon-orders {
+  &:before {
+    content: $icon-orders; 
+  }
+}
+.icon-catalog {
+  &:before {
+    content: $icon-catalog; 
+  }
+}
+.icon-coupon {
+  &:before {
+    content: $icon-coupon; 
+  }
+}
+.icon-eye {
+  &:before {
+    content: $icon-eye; 
+  }
+}
+.icon-pencil {
+  &:before {
+    content: $icon-pencil; 
+  }
+}
+.icon-pencil-square-o {
+  &:before {
+    content: $icon-pencil-square-o; 
   }
 }
 

@@ -1,0 +1,735 @@
+{
+  "site": "Vetement",
+  "description": "Ropa para toda la familia",
+  "icon": "icon.ico",
+  "logo": "logo1.png",
+  "domain": "/",
+  "api": "api/",
+  "theme": "$themes.easy-commerce",
+  "assets": {
+    "images": "assets/images",
+    "icons": "assets/icons",
+    "videos": "assets/videos",
+    "audios": "assets/audios",
+    "fonts": "assets/fonts",
+    "files": "assets/files"
+  },
+  "sections": {
+    "header": {
+      "type": "navbar",
+      "label": "Header",
+      "description": "Header of site, always at top.",
+      "icon": "navbar",
+      "attributes": {
+        "logo": "$logo",
+        "logoHeight": 80,
+        "description": "$description",
+        "menu": "$menus.user",
+        "menuLeft": "$menus.left",
+        "menuRight": "$menus.right"
+      }
+    },
+    "container": {
+      "type": "container",
+      "label": "Container",
+      "description": "Wrap content of page.",
+      "icon": "content"
+    },
+    "nav-side": {
+      "type": "nav-side",
+      "label": "Side Menu",
+      "description": "menu of routes.",
+      "icon": "menu"
+    },
+    "nav-service": {
+      "type": "nav-service",
+      "label": "Side Menu from service",
+      "description": "menu of routes provided by a service.",
+      "icon": "menu"
+    },
+    "footer": {
+      "type": "footer",
+      "label": "Footer",
+      "description": "Footer of site, always at bottom.",
+      "icon": "footer",
+      "attributes": {
+        "menu": "$menus.footer"
+      }
+    },
+    "hero": {
+      "label": "Hero",
+      "type": "hero",
+      "description": "First impresive image or banner container, wellcome to the site."
+    },
+    "signin-form": {
+      "type": "form",
+      "label": "Sign In",
+      "attributes": {
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {},
+          "remember-me": {}
+        }
+      }
+    },
+    "signup-form": {
+      "type": "form",
+      "label": "Sign Up",
+      "attributes": {
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {}
+        }
+      }
+    },
+    "jexcel": {
+      "type": "table-jexcel"
+    },
+    "nav-cards": {
+      "type": "nav-cards",
+      "label": "navication cards",
+      "description": "menu of routes on cards.",
+      "icon": "menu"
+    }
+  },
+  "menus": {
+    "main": [
+      {
+        "ref": "$pages.catalog"
+      },
+      {
+        "ref": "$pages.discounts"
+      },
+      {
+        "ref": "$pages.orders"
+      },
+      {
+        "ref": "$pages.nav-config"
+      }
+    ],
+    "config": [
+      {
+        "ref": "$pages.user"
+      },
+      {
+        "ref": "$pages.template"
+      },
+      {
+        "ref": "$pages.theme"
+      }
+    ],
+    "user": [
+      {
+        "ref": "$pages.user",
+        "path": "/configuracion/usuario",
+        "exact": true,
+        "label": "Administrador"
+      }
+    ]
+  },
+  "templates": {
+    "admin": {
+      "type": "template",
+      "label": "Admin",
+      "description": "template for admin",
+      "icon": "template",
+      "image": "template.jpg",
+      "className": "d-flex flex-column h-100 w-100",
+      "style": {
+        "position": "absolute"
+      },
+      "content": [
+        {
+          "ref": "$sections.header",
+          "className": "bg-light shadow-sm",
+          "style": {
+            "zIndex": 4
+          },
+          "attributes": {
+            "centeredLogo": false,
+            "menuPosition": "right",
+            "textOverColor": "light"
+          }
+        },
+        {
+          "ref": "$sections.container",
+          "allowChildren": true,
+          "className": "h-100",
+          "style": {
+            "position": "relative"
+          }
+        },
+        {
+          "ref": "$sections.footer",
+          "className": "bg-dark",
+          "attributes": {
+            "textOverColor": "dark"
+          }
+        }
+      ]
+    },
+    "side-panel": {
+      "type": "template",
+      "label": "Side Panel",
+      "description": "template for admin",
+      "icon": "template",
+      "image": "template.jpg",
+      "className": "h-100 w-100",
+      "style": {
+        "position": "absolute"
+      },
+      "useGrid": {
+        "row": "gx-0 h-100",
+        "columns": [
+          {
+            "className": "col-auto h-100",
+            "style": {
+              "zIndex": 3
+            }
+          },
+          {
+            "className": "h-100",
+            "style": {
+              "width": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "pages": {
+    "nav-main": {
+      "type": "page",
+      "label": "Bienvenido",
+      "path": "/",
+      "icon": "catalog",
+      "image": "catalog.jpg",
+      "className": "p-2",
+      "content": [
+        {
+          "ref": "$sections.nav-cards",
+          "attributes": {
+            "menu": "$menus.main"
+          }
+        }
+      ]
+    },
+    "nav-config": {
+      "type": "page",
+      "label": "Configuración",
+      "path": "/configuracion",
+      "icon": "gear",
+      "image": "config.jpg",
+      "className": "p-2",
+      "content": [
+        {
+          "ref": "$sections.nav-cards",
+          "attributes": {
+            "menu": "$menus.config"
+          }
+        }
+      ]
+    },
+    "catalog": {
+      "type": "page",
+      "label": "Catálogo",
+      "path": "/catalogo",
+      "icon": "catalog",
+      "image": "catalog.jpg",
+      "description": "lorem ipsum dollo",
+      "content": [
+        {
+          "ref": "$sections.jexcel",
+          "attributes": {
+            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "nestedHeaders": [
+              [
+                {
+                  "title": "Descripción del Producto o Servicio",
+                  "colspan": 6
+                },
+                {
+                  "title": "Datos de venta",
+                  "colspan": 7
+                }
+              ]
+            ],
+            "columns": [
+              {
+                "name": "id",
+                "title": " ",
+                "type": "numeric",
+                "readOnly": true,
+                "width": 90
+              },
+              {
+                "name": "name",
+                "title": "Nombre",
+                "type": "text",
+                "width": 250
+              },
+              {
+                "name": "gallery",
+                "title": "Galería",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "description",
+                "title": "Descripción",
+                "type": "text",
+                "width": 400
+              },
+              {
+                "name": "category",
+                "title": "Categoría",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "tags",
+                "title": "Etiquetas",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "price",
+                "title": "Precio",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "priceSale",
+                "title": "Oferta",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "unit",
+                "title": "Unidad",
+                "type": "text",
+                "width": 80
+              },
+              {
+                "name": "min",
+                "title": "Mínimo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "max",
+                "title": "Máximo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "step",
+                "title": "Incremento",
+                "type": "numeric",
+                "width": 100
+              },
+              {
+                "name": "discounts",
+                "title": "Descuentos",
+                "type": "text",
+                "width": 100
+              },
+              {
+                "name": "document",
+                "type": "hidden"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "discounts": {
+      "type": "page",
+      "label": "Descuentos",
+      "path": "/descuentos",
+      "icon": "coupon",
+      "image": "discounts.jpg",
+      "description": "lorem ipsum dollo",
+      "content": [
+        {
+          "ref": "$sections.jexcel",
+          "attributes": {
+            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "nestedHeaders": [
+              [
+                {
+                  "title": "Descripción del Producto o Servicio",
+                  "colspan": 6
+                },
+                {
+                  "title": "Datos de venta",
+                  "colspan": 7
+                }
+              ]
+            ],
+            "columns": [
+              {
+                "name": "id",
+                "type": "hidden"
+              },
+              {
+                "name": "name",
+                "title": "Nombre",
+                "type": "text",
+                "width": 250
+              },
+              {
+                "name": "gallery",
+                "title": "Galería",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "description",
+                "title": "Descripción",
+                "type": "text",
+                "width": 400
+              },
+              {
+                "name": "category",
+                "title": "Categoría",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "tags",
+                "title": "Etiquetas",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "price",
+                "title": "Precio",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "priceSale",
+                "title": "Oferta",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "unit",
+                "title": "Unidad",
+                "type": "text",
+                "width": 80
+              },
+              {
+                "name": "min",
+                "title": "Mínimo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "max",
+                "title": "Máximo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "step",
+                "title": "Incremento",
+                "type": "numeric",
+                "width": 100
+              },
+              {
+                "name": "discounts",
+                "title": "Descuentos",
+                "type": "text",
+                "width": 100
+              },
+              {
+                "name": "document",
+                "type": "hidden"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "orders": {
+      "type": "page",
+      "label": "Pedidos",
+      "path": "/pedidos",
+      "icon": "orders",
+      "image": "orders.jpg",
+      "description": "lorem ipsum dollo",
+      "content": [
+        {
+          "ref": "$sections.jexcel",
+          "attributes": {
+            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "nestedHeaders": [
+              [
+                {
+                  "title": "Descripción del Producto o Servicio",
+                  "colspan": 5
+                },
+                {
+                  "title": "Datos de venta",
+                  "colspan": 7
+                }
+              ]
+            ],
+            "columns": [
+              {
+                "name": "name",
+                "title": "Nombre",
+                "type": "text",
+                "width": 250
+              },
+              {
+                "name": "gallery",
+                "title": "Galería",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "description",
+                "title": "Descripción",
+                "type": "text",
+                "width": 400
+              },
+              {
+                "name": "category",
+                "title": "Categoría",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "tags",
+                "title": "Etiquetas",
+                "type": "text",
+                "width": 120
+              },
+              {
+                "name": "price",
+                "title": "Precio",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "priceSale",
+                "title": "Oferta",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "unit",
+                "title": "Unidad",
+                "type": "text",
+                "width": 80
+              },
+              {
+                "name": "min",
+                "title": "Mínimo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "max",
+                "title": "Máximo",
+                "type": "numeric",
+                "width": 80
+              },
+              {
+                "name": "step",
+                "title": "Incremento",
+                "type": "numeric",
+                "width": 100
+              },
+              {
+                "name": "discounts",
+                "title": "Descuentos",
+                "type": "text",
+                "width": 100
+              },
+              {
+                "name": "document",
+                "type": "hidden"
+              },
+              {
+                "name": "id",
+                "type": "hidden"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "item": {
+      "type": "page",
+      "label": "Item",
+      "path": "/:itemPath",
+      "icon": "item",
+      "image": "images/item.jpg",
+      "description": "lorem ipsum dollo",
+      "content": []
+    },
+    "user": {
+      "type": "page",
+      "label": "Usuario",
+      "path": "/configuracion/usuario",
+      "icon": "user",
+      "content": []
+    },
+    "template": {
+      "type": "page",
+      "label": "Plantilla",
+      "path": "/configuracion/plantilla",
+      "icon": "note-list",
+      "content": []
+    },
+    "theme": {
+      "type": "page",
+      "label": "Tema",
+      "path": "/configuracion/tema",
+      "icon": "filter",
+      "content": []
+    }
+  },
+  "routes": {
+    "template": "$templates.admin",
+    "children": [
+      {
+        "path": "/",
+        "exact": true,
+        "content": "$pages.nav-main"
+      },
+      {
+        "template": {
+          "ref": "$templates.side-panel",
+          "content": [
+            {
+              "ref": "$sections.nav-side",
+              "className": "bg-light shadow h-100",
+              "attributes": {
+                "menu": "$menus.main"
+              }
+            },
+            {
+              "ref": "$sections.container",
+              "allowChildren": true,
+              "className": "h-100",
+              "attributes": {
+                "id": "table-container",
+                "responsive": true,
+                "className": "h-100"
+              }
+            }
+          ]
+        },
+        "transition": "slideRight",
+        "children": [
+          {
+            "path": "/catalogo",
+            "children": [
+              {
+                "path": "/",
+                "content": "$pages.catalog",
+                "exact": true
+              },
+              {
+                "template": {
+                  "ref": "$templates.side-panel",
+                  "content": [
+                    {
+                      "ref": "$sections.nav-service",
+                      "className": "bg-light shadow h-100 overflow-auto",
+                      "attributes": {
+                        "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+                        "iconFrom": "gallery",
+                        "labelFrom": "name"
+                      }
+                    },
+                    {
+                      "ref": "$sections.container",
+                      "allowChildren": true,
+                      "className": "h-100",
+                      "style": {
+                        "position": "relative"
+                      }
+                    }
+                  ]
+                },
+                "children": [
+                  {
+                    "path": "/:itemPath",
+                    "content": "$pages.item"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "path": "/pedidos",
+            "content": "$pages.orders"
+          },
+          {
+            "path": "/descuentos",
+            "content": "$pages.discounts"
+          },
+          {
+            "path": "/configuracion",
+            "children": [
+              {
+                "path": "/",
+                "content": "$pages.nav-config",
+                "exact": true
+              },
+              {
+                "template": {
+                  "ref": "$templates.side-panel",
+                  "content": [
+                    {
+                      "ref": "$sections.nav-side",
+                      "className": "bg-light shadow h-100",
+                      "attributes": {
+                        "menu": "$menus.config"
+                      }
+                    },
+                    {
+                      "ref": "$sections.container",
+                      "allowChildren": true
+                    }
+                  ]
+                },
+                "children": [
+                  {
+                    "path": "/usuario",
+                    "content": "$pages.user"
+                  },
+                  {
+                    "path": "/plantilla",
+                    "content": "$pages.template"
+                  },
+                  {
+                    "path": "/tema",
+                    "content": "$pages.theme"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "themes": {
+    "easy-commerce": {
+      "base": "default",
+      "label": "Easy Commerce bs theme",
+      "style": "",
+      "variables": {},
+      "fonts": []
+    }
+  }
+}

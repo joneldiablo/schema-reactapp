@@ -1,0 +1,401 @@
+{
+  "site": "MangiBone",
+  "description": "Come rico, come saludable ¡come bien!",
+  "icon": "icon.ico",
+  "logo": "images/mangibone.svg",
+  "domain": "mangibone.com",
+  "api": "api/",
+  "theme": "$themes.easy-commerce",
+  "assets": {
+    "images": "assets/images",
+    "icons": "assets/icons",
+    "videos": "assets/videos",
+    "audios": "assets/audios",
+    "fonts": "assets/fonts",
+    "files": "assets/files"
+  },
+  "sections": {
+    "header": {
+      "type": "navbar",
+      "label": "Header",
+      "description": "Header of site, always at top.",
+      "icon": "navbar",
+      "attributes": {
+        "site": "$site",
+        "logo": "$logo",
+        "logoHeight": 80,
+        "description": "$description",
+        "menu": "$menus.main",
+        "menuLeft": "$menus.left",
+        "menuRight": "$menus.right"
+      }
+    },
+    "container": {
+      "type": "container",
+      "label": "Container",
+      "description": "Wrap content of page.",
+      "icon": "content"
+    },
+    "footer": {
+      "type": "footer",
+      "label": "Footer",
+      "description": "Footer of site, always at bottom.",
+      "icon": "footer",
+      "attributes": {
+        "menu": "$menus.footer"
+      }
+    },
+    "hero": {
+      "label": "Hero",
+      "type": "hero",
+      "description": "First impresive image or banner container, wellcome to the site."
+    },
+    "signin-form": {
+      "type": "form",
+      "label": "Sign In",
+      "attributes": {
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {},
+          "remember-me": {}
+        }
+      }
+    },
+    "signup-form": {
+      "type": "form",
+      "label": "Sign Up",
+      "attributes": {
+        "endpoint": "",
+        "fields": {
+          "user": {},
+          "password": {}
+        }
+      }
+    }
+  },
+  "menus": {
+    "main": [
+      {
+        "ref": "$pages.home",
+        "exact": true
+      },
+      "$pages.about",
+      "$pages.catalog",
+      "$pages.contact"
+    ],
+    "left": [
+      "$pages.about",
+      "$pages.contact"
+    ],
+    "right": [
+      "$pages.catalog",
+      "$pages.cart"
+    ],
+    "footer": [
+      {
+        "ref": "$pages.home",
+        "exact": true
+      },
+      "$pages.about",
+      "$pages.contact",
+      "$pages.blog",
+      "$pages.privacy-terms"
+    ],
+    "social-networks": [
+      {
+        "label": "Facebook",
+        "path": "https://facebook.com",
+        "icon": "./assets/icons/facebook.svg"
+      },
+      {
+        "label": "Twitter",
+        "path": "https://twitter.com",
+        "icon": "./assets/icons/twitter.svg"
+      },
+      {
+        "label": "YouTube",
+        "path": "https://youtube.com",
+        "icon": "./assets/icons/youtube.svg"
+      }
+    ]
+  },
+  "templates": {
+    "public": {
+      "type": "template",
+      "label": "Public",
+      "description": "template for all public website",
+      "icon": "template",
+      "image": "images/template.jpg",
+      "content": [
+        {
+          "ref": "$sections.header",
+          "background": "white",
+          "shadow": true,
+          "zIndex": 1,
+          "attributes": {
+            "centeredLogo": false,
+            "menuPosition": "right",
+            "textOverColor": "light"
+          }
+        },
+        {
+          "ref": "$sections.container",
+          "allowChildren": true
+        },
+        {
+          "ref": "$sections.footer",
+          "background": "dark",
+          "attributes": {
+            "textOverColor": "dark"
+          }
+        }
+      ]
+    },
+    "access": [
+      {
+        "ref": "$sections.container",
+        "allowChildren": true,
+        "attributes": {
+          "type": "card"
+        }
+      }
+    ],
+    "document": [
+      {
+        "ref": "$sections.modal",
+        "allowChildren": true,
+        "attributes": {
+          "type": "document"
+        }
+      }
+    ],
+    "store": {
+      "type": "template",
+      "label": "Store",
+      "content": [
+        "$sections.catalog-filters",
+        {
+          "ref": "$sections.content",
+          "allowChildren": true
+        }
+      ]
+    }
+  },
+  "pages": {
+    "home": {
+      "type": "page",
+      "label": "Inicio",
+      "path": "/",
+      "icon": "home",
+      "image": "images/home.jpg",
+      "description": "lorem ipsum dollo",
+      "content": [
+        {
+          "ref": "$sections.hero",
+          "background": "primary"
+        },
+        {
+          "ref": "$sections.service",
+          "attributes": {
+            "service": "sections/wellcome"
+          }
+        },
+        {
+          "ref": "$sections.slider",
+          "attributes": {
+            "type": "cards-vertical",
+            "show": 2,
+            "service": "products/categories",
+            "filters": {
+              "limit": 5,
+              "featured": true
+            }
+          }
+        },
+        {
+          "ref": "$sections.slider",
+          "attributes": {
+            "service": "products",
+            "filters": {
+              "limit": 3,
+              "featured": true
+            }
+          }
+        }
+      ]
+    },
+    "about": {
+      "type": "page",
+      "label": "Quiénes Somos",
+      "path": "/about",
+      "icon": "about",
+      "image": "images/about.jpg",
+      "description": "lorem ipsum dollo",
+      "content": []
+    },
+    "catalog": {
+      "type": "page",
+      "label": "Catálogo",
+      "path": "/catalog",
+      "icon": "catalog",
+      "image": "images/catalog.jpg",
+      "description": "lorem ipsum dollo",
+      "content": [
+        "$sections.catalog-list"
+      ]
+    },
+    "item": {
+      "type": "page",
+      "label": ":name",
+      "path": "/:path",
+      "icon": "item",
+      "image": ":image",
+      "description": ":description",
+      "content": []
+    },
+    "cart": {
+      "type": "page",
+      "label": "Carrito",
+      "path": "/cart",
+      "icon": "cart",
+      "content": []
+    },
+    "checkout": [],
+    "purchase-done": [],
+    "purchase-error": [],
+    "error": [],
+    "not-found": [],
+    "contact": {
+      "type": "page",
+      "label": "Contacto",
+      "path": "/contact",
+      "icon": "contact",
+      "image": "images/contact.jpg",
+      "description": "lorem ipsum dollo",
+      "content": []
+    },
+    "signin": [],
+    "signup": [],
+    "password": [],
+    "terms": [],
+    "privacy": [],
+    "survey": []
+  },
+  "routes": [
+    {
+      "template": "$templates.access",
+      "transition": "slideBottom",
+      "children": [
+        {
+          "path": "/signin",
+          "content": "$pages.signin",
+          "children": [
+            {
+              "path": "/reset-password",
+              "content": "$pages.password"
+            }
+          ]
+        },
+        {
+          "path": "/signup",
+          "content": "$pages.signup"
+        }
+      ]
+    },
+    {
+      "template": "$templates.document",
+      "children": [
+        {
+          "path": [
+            "*/privacy",
+            "/privacy"
+          ],
+          "content": "$pages.privacy"
+        },
+        {
+          "path": [
+            "*/terms",
+            "/terms"
+          ],
+          "content": "$pages.terms"
+        }
+      ]
+    },
+    {
+      "template": "$templates.public",
+      "transition": "slideLeft",
+      "children": [
+        {
+          "//ATENTION": "the default path must be in last object if not, desapear other paths!!!",
+          "path": "/",
+          "exact": true,
+          "content": "$pages.home"
+        },
+        {
+          "path": "/about",
+          "content": "$pages.about"
+        },
+        {
+          "template": "$templates.store",
+          "children": [
+            {
+              "path": "/catalog",
+              "content": "$pages.catalog",
+              "children": [
+                {
+                  "path": ":path",
+                  "content": "$pages.item"
+                }
+              ]
+            },
+            {
+              "path": "cart",
+              "content": "$pages.cart",
+              "children": [
+                {
+                  "path": "shipping",
+                  "content": "$pages.shipping"
+                },
+                {
+                  "path": "checkout",
+                  "exact": true,
+                  "content": "$pages.checkout"
+                },
+                {
+                  "path": "checkout/done",
+                  "content": "$pages.checkout-done"
+                },
+                {
+                  "path": "checkout/error",
+                  "content": "$pages.checkout-error"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/contact",
+          "content": "$pages.contact"
+        },
+        {
+          "path": "survey",
+          "content": "$pages.survey"
+        },
+        {
+          "path": "*",
+          "content": "$pages.not-found"
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "easy-commerce": {
+      "base": "default",
+      "label": "Easy Commerce bs theme",
+      "style": "",
+      "variables": {},
+      "fonts": []
+    }
+  }
+}

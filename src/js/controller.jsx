@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
 import urlJoin from "url-join";
-import importedComponent from 'react-imported-component';
+import { setSchema } from "./functions";
 import findComponent from "./find-component";
 import mapRoutes from "./map-routes";
 import Template from "./containers/template";
@@ -61,14 +61,12 @@ pages: this.resolveRefs(this.props.schema.pages), */
   }
 
   components({ type, from } = {}) {
-    return importedComponent(() => {
-      let path = findComponent(type, true) || from;
-      // use the template string (`...`) because "import" function not working with variables
-      return import(`${path}`);
-    }, {
-      LoadingComponent: () => 'loading',
-      ErrorComponent: () => 'error'
-    })
+    //type name of componente which colud find with "findComponent", from is the path to component, is not working, some love here!!!
+    return withRouter(findComponent(type || from));
+  }
+
+  componentWillMount() {
+    setSchema(this.props.schema);
   }
 
   pages(pageId) {
@@ -78,7 +76,13 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let ThisPage = this.props.Page;
     let ThisSection = this.props.Section;
     return <ThisPage {...page}>
-      {content.map((item, i) => <ThisSection key={i} {...item} Component={this.components(item)} />)}
+      {content.map((item, i) =>
+        <ThisSection key={i} {...item} Component={this.components(item)} >
+          {Array.isArray(item.content) && item.content.map((c, j) =>
+            <ThisSection key={j} {...c} Component={this.components(c)} />
+          )}
+        </ThisSection>
+      )}
     </ThisPage>
   }
 
@@ -90,7 +94,9 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let ThisSection = this.props.Section;
     return <ThisTemplate {...template}>
       {content.map((item, i) => {
-        return <ThisSection key={i} {...item} Component={this.components(item)} children={children} />
+        return <ThisSection key={i} {...item} Component={this.components(item)} >
+          {item.allowChildren && children}
+        </ThisSection>
       })}
     </ThisTemplate>
   }

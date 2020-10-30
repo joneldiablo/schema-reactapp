@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { randomS4 } from "../functions";
+import { assets, randomS4 } from "../functions";
 
 export default class Navbar extends React.Component {
+
   static defaultProps = {
     background: false,
     textOverColor: 'light',//light|dark
@@ -12,7 +13,9 @@ export default class Navbar extends React.Component {
     shadow: false,//sm,lg
     centeredLogo: false, //center|between|around|evenly
   }
+
   id = this.constructor.name + '-' + randomS4();
+
   render() {
     let { logo, logoHeight, site, menu,
       menuLeft, menuRight, background,
@@ -28,13 +31,14 @@ export default class Navbar extends React.Component {
 
     const menuItemFunc = (item, i) =>
       item && <NavLink key={i} to={item.path} className="nav-link" exact={item.exact} activeClassName='active'>{item.label}</NavLink>
+
     const Logo = ({ hidden, visible }) => {
       if (!logo && !site) return null;
       let className = ['navbar-brand',
         visible && `m-0 d-none d-${visible}-block`,
         hidden && `d-${hidden}-none`].filter(c => c).join(' ');
       return <NavLink className={className} to="/">
-        <img src={logo} alt={site} height={logoHeight} />
+        <img src={assets('images', logo)} alt={site} height={logoHeight} />
         {site}
       </NavLink>
     }

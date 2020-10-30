@@ -9,9 +9,9 @@ const transitions = {
     atEnter: { offset: -100, opacity: 0 },
     atLeave: { offset: 100, opacity: 0 },
     atActive: { offset: 0, opacity: 1 },
-    mapStyles: (styles) => ({
-      transform: styles.offset != 0 ? `translateX(${styles.offset}%)` : null,
-      opacity: styles.opacity
+    mapStyles: ({ offset, opacity }) => ({
+      transform: offset != 0 ? `translateX(${offset}%)` : null,
+      opacity
     })
   },
   slideLeft: {
