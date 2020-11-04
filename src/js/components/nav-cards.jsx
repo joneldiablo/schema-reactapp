@@ -63,7 +63,7 @@ export default class NavCards extends React.Component {
                 minHeight: 150
               }} /> : <div className="card-img" style={{ minHeight: 150 }}></div>}
               <div className="card-img-overlay">
-                <div class="card-body nav-card-body">
+                <div className="card-body nav-card-body">
                   <h5 className="card-title nav-item">
                     <Icons icon={item.icon} className="mr-2" />
                     {item.label}
