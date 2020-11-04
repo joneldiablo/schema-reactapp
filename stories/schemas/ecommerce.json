@@ -72,6 +72,11 @@
           "password": {}
         }
       }
+    },
+    "catalog-filters": {
+      "content": [
+        "nanana"
+      ]
     }
   },
   "menus": {
@@ -176,7 +181,7 @@
       "content": [
       "$sections.catalog-filters",
       {
-        "ref": "$sections.content",
+        "ref": "$sections.container",
         "allowChildren": true
       }
     ]

@@ -96,11 +96,9 @@ pages: this.resolveRefs(this.props.schema.pages), */
     let ThisTemplate = this.props.Template;
     let ThisSection = this.props.Section;
     return <ThisTemplate {...template}>
-      {content.map((item, i) => {
-        return <ThisSection key={i} {...item} Component={this.components(item)} >
-          {item.allowChildren && children}
-        </ThisSection>
-      })}
+      {content.map((item, i) => <ThisSection key={i} {...item} Component={this.components(item)} >
+        {item.allowChildren && children}
+      </ThisSection>)}
     </ThisTemplate>
   }
 
