@@ -13,7 +13,7 @@ export default class Container extends React.Component {
     clearTimeout(this.onResizeTimeout);
     this.onResizeTimeout = setTimeout(() => {
       let { offsetWidth: width, offsetHeight: height } = this.wrapper.current;
-      eventEmitter.dispatch('resize', {
+      eventEmitter.dispatch('resize-' + this.props.id, {
         width,
         height
       });

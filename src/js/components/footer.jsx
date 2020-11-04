@@ -12,16 +12,18 @@ export default class Footer extends React.Component {
       'navbar-' + textOverColor,
     ].filter(c => c).join(' ');
     return <div>
-      <nav className={className}>
-        <div className="container-fluid">
-          <div className="navbar-nav">
-            {menu && menu.map((item, i) =>
-              item && <NavLink key={i} to={item.path} className="nav-link" exact={item.exact} activeClassName='active'>{item.label}</NavLink>
-            )}
+      {menu ? <>
+        <nav className={className}>
+          <div className="container-fluid">
+            <div className="navbar-nav">
+              {menu.map((item, i) =>
+                item && <NavLink key={i} to={item.path} className="nav-link" exact={item.exact} activeClassName='active'>{item.label}</NavLink>
+              )}
+            </div>
           </div>
-        </div>
-      </nav>
-      <hr />
+        </nav>
+        <hr />
+      </> : <br />}
       <div className="container-fluid text-muted">
         {copyright || <>
           <small className="text-muted">

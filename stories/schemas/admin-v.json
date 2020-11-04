@@ -2,12 +2,12 @@
   "site": "Vetement",
   "description": "Ropa para toda la familia",
   "icon": "icon.ico",
-  "logo": "logo1.png",
+  "logo": "mangibone.png",
   "domain": "/",
   "api": "api/",
   "theme": "$themes.easy-commerce",
   "assets": {
-    "images": "assets/images",
+    "images": "images",
     "icons": "assets/icons",
     "videos": "assets/videos",
     "audios": "assets/audios",
@@ -22,7 +22,7 @@
       "icon": "navbar",
       "attributes": {
         "logo": "$logo",
-        "logoHeight": 80,
+        "logoHeight": 54,
         "description": "$description",
         "menu": "$menus.user",
         "menuLeft": "$menus.left",
@@ -145,7 +145,7 @@
           "ref": "$sections.header",
           "className": "bg-light shadow-sm",
           "style": {
-            "zIndex": 4
+            "zIndex": 5
           },
           "attributes": {
             "centeredLogo": false,
@@ -156,7 +156,7 @@
         {
           "ref": "$sections.container",
           "allowChildren": true,
-          "className": "h-100",
+          "className": "h-100 overflow-auto",
           "style": {
             "position": "relative"
           }
@@ -186,7 +186,7 @@
           {
             "className": "col-auto h-100",
             "style": {
-              "zIndex": 3
+              "zIndex": 4
             }
           },
           {
@@ -206,7 +206,6 @@
       "path": "/",
       "icon": "catalog",
       "image": "catalog.jpg",
-      "className": "p-2",
       "content": [
         {
           "ref": "$sections.nav-cards",
@@ -222,11 +221,11 @@
       "path": "/configuracion",
       "icon": "gear",
       "image": "config.jpg",
-      "className": "p-2",
       "content": [
         {
           "ref": "$sections.nav-cards",
           "attributes": {
+            "closestId": "table-container",
             "menu": "$menus.config"
           }
         }
@@ -243,7 +242,7 @@
         {
           "ref": "$sections.jexcel",
           "attributes": {
-            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "url": "https://my.api.mockaroo.com/products.json?key=0c3052e0",
             "nestedHeaders": [
               [
                 {
@@ -259,7 +258,7 @@
             "columns": [
               {
                 "name": "id",
-                "title": " ",
+                "title": "ID",
                 "type": "numeric",
                 "readOnly": true,
                 "width": 90
@@ -271,8 +270,8 @@
                 "width": 250
               },
               {
-                "name": "gallery",
-                "title": "Galería",
+                "name": "images",
+                "title": "Imágenes",
                 "type": "text",
                 "width": 120
               },
@@ -340,7 +339,8 @@
                 "name": "document",
                 "type": "hidden"
               }
-            ]
+            ],
+            "closestId": "table-container"
           }
         }
       ]
@@ -356,7 +356,7 @@
         {
           "ref": "$sections.jexcel",
           "attributes": {
-            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "url": "https://my.api.mockaroo.com/products.json?key=0c3052e0",
             "nestedHeaders": [
               [
                 {
@@ -381,8 +381,8 @@
                 "width": 250
               },
               {
-                "name": "gallery",
-                "title": "Galería",
+                "name": "images",
+                "title": "Imágenes",
                 "type": "text",
                 "width": 120
               },
@@ -466,7 +466,7 @@
         {
           "ref": "$sections.jexcel",
           "attributes": {
-            "url": "https://my.api.mockaroo.com/products.json?key=30283510",
+            "url": "https://my.api.mockaroo.com/products.json?key=0c3052e0",
             "nestedHeaders": [
               [
                 {
@@ -487,8 +487,8 @@
                 "width": 250
               },
               {
-                "name": "gallery",
-                "title": "Galería",
+                "name": "images",
+                "title": "Imágenes",
                 "type": "text",
                 "width": 120
               },
@@ -572,14 +572,18 @@
       "icon": "item",
       "image": "images/item.jpg",
       "description": "lorem ipsum dollo",
-      "content": []
+      "content": [
+        "Sí aquí va el contenido del producto papirrin!!!!"
+      ]
     },
     "user": {
       "type": "page",
       "label": "Usuario",
       "path": "/configuracion/usuario",
-      "icon": "user",
-      "content": []
+      "icon": "user-circle",
+      "content": [
+        "hola mundo usuario"
+      ]
     },
     "template": {
       "type": "page",
@@ -610,7 +614,7 @@
           "content": [
             {
               "ref": "$sections.nav-side",
-              "className": "bg-light shadow h-100",
+              "className": "bg-light shadow-hover h-100",
               "attributes": {
                 "menu": "$menus.main"
               }
@@ -640,13 +644,30 @@
               {
                 "template": {
                   "ref": "$templates.side-panel",
+                  "useGrid": {
+                    "row": "gx-0 h-100",
+                    "columns": [
+                      {
+                        "className": "col-auto h-100",
+                        "style": {
+                          "zIndex": 3
+                        }
+                      },
+                      {
+                        "className": "h-100",
+                        "style": {
+                          "width": 0
+                        }
+                      }
+                    ]
+                  },
                   "content": [
                     {
                       "ref": "$sections.nav-service",
-                      "className": "bg-light shadow h-100 overflow-auto",
+                      "className": "bg-light shadow-hover h-100",
                       "attributes": {
-                        "url": "https://my.api.mockaroo.com/products.json?key=30283510",
-                        "iconFrom": "gallery",
+                        "url": "https://my.api.mockaroo.com/products.json?key=0c3052e0",
+                        "iconFrom": "images",
                         "labelFrom": "name"
                       }
                     },
@@ -688,10 +709,27 @@
               {
                 "template": {
                   "ref": "$templates.side-panel",
+                  "useGrid": {
+                    "row": "gx-0 h-100",
+                    "columns": [
+                      {
+                        "className": "col-auto h-100",
+                        "style": {
+                          "zIndex": 3
+                        }
+                      },
+                      {
+                        "className": "h-100",
+                        "style": {
+                          "width": 0
+                        }
+                      }
+                    ]
+                  },
                   "content": [
                     {
                       "ref": "$sections.nav-side",
-                      "className": "bg-light shadow h-100",
+                      "className": "bg-light shadow-hover h-100",
                       "attributes": {
                         "menu": "$menus.config"
                       }
@@ -702,6 +740,7 @@
                     }
                   ]
                 },
+                "transition": "slideRight",
                 "children": [
                   {
                     "path": "/usuario",

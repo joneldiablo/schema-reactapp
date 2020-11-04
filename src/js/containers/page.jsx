@@ -1,5 +1,4 @@
 import React from "react";
-import { randomS4 } from "../functions";
 
 export default class Page extends React.Component {
 
@@ -8,12 +7,10 @@ export default class Page extends React.Component {
     style: {}
   };
 
-  id = this.constructor.name + '-' + randomS4();
-
   render() {
-    let { className, style } = this.props;
+    let { className, style, id } = this.props;
     let classNameJoin = [this.constructor.name, className].join(' ');
-    return <article className={classNameJoin} id={this.id} style={style}>
+    return <article className={classNameJoin} id={this.constructor.name + '-' + id} style={style}>
       {this.props.children}
     </article>
   }

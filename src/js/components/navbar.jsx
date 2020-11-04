@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { assets, randomS4 } from "../functions";
+import Icons from "../icons";
 
 export default class Navbar extends React.Component {
 
@@ -30,7 +31,10 @@ export default class Navbar extends React.Component {
     ].filter(c => c).join(' ');
 
     const menuItemFunc = (item, i) =>
-      item && <NavLink key={i} to={item.path} className="nav-link" exact={item.exact} activeClassName='active'>{item.label}</NavLink>
+      item && <NavLink key={i} to={item.path} className="nav-link" exact={item.exact} activeClassName='active'>
+        <Icons icon={item.icon} className="mr-2" />
+        {item.label}
+      </NavLink>
 
     const Logo = ({ hidden, visible }) => {
       if (!logo && !site) return null;

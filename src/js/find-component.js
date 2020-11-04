@@ -8,33 +8,42 @@ import Grid from "./components/grid";
 import NavSide from "./components/nav-side";
 import NavService from "./components/nav-service";
 import NavCards from './components/nav-cards';
+import NavListCards from './components/nav-list-cards';
 import Component from "./components/component";
 
 export default (type = false) => {
   let path;
   switch (type) {
+    case 'Navbar':
     case 'navbar':
       return Navbar;
+    case 'Container':
     case 'container':
       return Container;
+    case 'Hero':
     case 'hero':
       return Hero;
+    case 'Footer':
     case 'footer':
       return Footer;
-    case 'tableJexcel':
+    case 'TableJexcel':
     case 'table-jexcel':
       return TableJexcel;
+    case 'Grid':
     case 'grid':
       return Grid;
-    case 'navSide':
+    case 'NavSide':
     case 'nav-side':
       return NavSide;
-    case 'navService':
+    case 'NavService':
     case 'nav-service':
       return NavService;
-    case 'navCards':
+    case 'NavCards':
     case 'nav-cards':
       return NavCards;
+    case 'NavListCards':
+    case 'nav-list-cards':
+      return NavListCards;
     default:
       path = type;
   }

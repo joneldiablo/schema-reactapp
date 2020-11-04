@@ -45,7 +45,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
         .forEach(k => {
           if (k === 'ref') {
             Object.assign(toReturn, this.resolveRefs(item[k]));
-            toReturn['id'] = item[k].substring(1).split('.').pop();
+            toReturn['name'] = item[k].substring(1).split('.').pop();
           } else if (k === 'attributes') {
             toReturn[k] = Object.assign(toReturn[k] || {}, this.resolveRefs(item[k]));
           }
@@ -71,17 +71,20 @@ pages: this.resolveRefs(this.props.schema.pages), */
 
   pages(pageId) {
     let page = this.resolveRefs(pageId) || [];
+    if (!page.id) page.id = pageId.split('.').pop();
     let { content } = page;
     if (Array.isArray(page)) content = page;
     let ThisPage = this.props.Page;
     let ThisSection = this.props.Section;
     return <ThisPage {...page}>
       {content.map((item, i) =>
-        <ThisSection key={i} {...item} Component={this.components(item)} >
-          {Array.isArray(item.content) && item.content.map((c, j) =>
-            <ThisSection key={j} {...c} Component={this.components(c)} />
-          )}
-        </ThisSection>
+        typeof item === 'object' ?
+          <ThisSection key={i} {...item} Component={this.components(item)} >
+            {Array.isArray(item.content) && item.content.map((c, j) =>
+              typeof c === 'object' ?
+                <ThisSection key={j} {...c} Component={this.components(c)} /> : c
+            )}
+          </ThisSection> : item
       )}
     </ThisPage>
   }

@@ -1,0 +1,146 @@
+{
+  "site": "El Tianguis Online",
+  "description": "Encuentra lo que buscabas, cerca de ti.",
+  "icon": "icon.ico",
+  "logo": "logo1.png",
+  "domain": "/",
+  "api": "api/",
+  "theme": "$themes.eltianguisonline",
+  "assets": {
+    "images": "assets/images",
+    "icons": "assets/icons",
+    "videos": "assets/videos",
+    "audios": "assets/audios",
+    "fonts": "assets/fonts",
+    "files": "assets/files"
+  },
+  "pages": {
+    "home": {
+      "type": "page",
+      "label": "Página de Inicio",
+      "path": "/",
+      "icon": "home",
+      "image": "home.jpg",
+      "content": [
+        {
+          "ref": "$sections.nav-list-cards",
+          "attributes": {
+            "menu": "$menus.main",
+            "containerId": "global-container"
+          }
+        }
+      ]
+    },
+    "catalog": {
+      "type": "page",
+      "label": "Catálogo de productos",
+      "description": "Listado de productos y/o servicios.",
+      "path": "/catalogo",
+      "icon": "catalog",
+      "image": "catalog.jpg",
+      "content": [
+        "catalog"
+      ]
+    },
+    "discounts": {
+      "type": "page",
+      "label": "Descuentos",
+      "description": "Descuentos y cupones de descuento, usa cualquier regla de descuento que te puedas imaginar.",
+      "path": "/descuentos",
+      "icon": "coupon",
+      "image": "discounts.jpg",
+      "content": [
+        "discounts"
+      ]
+    },
+    "orders": {
+      "type": "page",
+      "label": "Pedidos",
+      "description": "Pedidos y órdenes de compra, administra todos las ventas que tengas en un solo lugar.",
+      "path": "/pedidos",
+      "icon": "orders",
+      "image": "orders.jpg",
+      "content": [
+        "orders"
+      ]
+    },
+    "nav-config": {
+      "type": "page",
+      "label": "Configuración",
+      "description": "Administra el tema del sitio, plantilla general, tus datos de usuario, datos de tu sitio y mucho más.",
+      "path": "/configuracion",
+      "icon": "gear",
+      "image": "config.jpg",
+      "content": [
+        "config"
+      ]
+    }
+  },
+  "sections": {
+    "header": {
+      "type": "navbar",
+      "label": "Header",
+      "description": "Header of site, always at top.",
+      "icon": "navbar",
+      "attributes": {
+        "logo": "$logo",
+        "logoHeight": 80,
+        "description": "$description",
+        "menu": "$menus.user",
+        "menuLeft": "$menus.left",
+        "menuRight": "$menus.right"
+      }
+    },
+    "nav-list-cards": {
+      "type": "nav-list-cards",
+      "label": "Navication ist and cards",
+      "description": "Menu as list when mobile, cards when desktop.",
+      "icon": "menu"
+    }
+  },
+  "menus": {
+    "main": [
+      {
+        "ref": "$pages.catalog"
+      },
+      {
+        "ref": "$pages.discounts"
+      },
+      {
+        "ref": "$pages.orders"
+      },
+      {
+        "ref": "$pages.nav-config"
+      }
+    ]
+  },
+  "templates": {
+    "admin": {
+      "type": "template",
+      "label": "Admin",
+      "description": "template for admin",
+      "icon": "template",
+      "image": "template.jpg",
+      "content": [
+        {
+          "ref": "$sections.container",
+          "allowChildren": true,
+          "responsive": true,
+          "id": "global-container"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "template": "$templates.admin",
+    "children": [
+      {
+        "path": "/",
+        "exact": true,
+        "content": "$pages.home"
+      }
+    ]
+  },
+  "endpoints": {},
+  "themes": {}
+}

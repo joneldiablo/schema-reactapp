@@ -25,8 +25,7 @@ export default class TableJexcel extends React.Component {
 
   updateTable = (tableInstance, cell, col, row, val, id) => {
     if (col === 0) {
-      let buttons = this.editRow(this.jexcel.getRowData(row));
-      cell.appendChild(buttons);
+      this.rowRenderActions(cell, row, val);
     }
     if (col === 2) {
       if (!val) return;
@@ -43,11 +42,20 @@ export default class TableJexcel extends React.Component {
     //j.style.maxHeight = height + 'px';
   }
 
-  nav = (e) => {
+  rowGotoEdit = (e, id) => {
     e.preventDefault();
-    let a = e.target;
-    if (e.target.tagName != 'a') a = e.target.closest('a');
-    this.props.history.push('/catalogo/' + a.dataset.id);
+    console.log(id);
+    this.props.history.push('/catalogo/' + id);
+  }
+
+  rowOpenView = (e, id) => {
+    e.preventDefault();
+    window.open('https://google.com', '_blank');
+  }
+
+  rowDelete = (e) => {
+    e.preventDefault();
+    this.jexcel.deleteRow();
   }
 
   loadTable() {
@@ -68,27 +76,32 @@ export default class TableJexcel extends React.Component {
   componentDidMount() {
     this.table = this.tableRef.current;
     this.loadTable();
-    eventEmitter.subscribe('resize', this.onResize, this.instance);
+    eventEmitter.subscribe('resize-' + this.props.closestId, this.onResize, this.instance);
   }
 
   componentWillUnmount() {
-    eventEmitter.unsubscribe('resize', this.instance);
+    eventEmitter.unsubscribe('resize-' + this.props.closestId, this.instance);
   }
 
-  editRow(row) {
-    let p = document.createElement('div');
-    ReactDom.render(<div className="my-2">
-      <a href="#" data-id={row[0]} onClick={this.nav} className="link-info">
-        <Icons icon="eye" className="mr-2" />
-      </a>
-      <a href="#" data-id={row[0]} onClick={this.nav}>
-        <Icons icon="pencil-square-o" className="mr-2" />
-      </a>
-      <a href="#" data-id={row[0]} onClick={this.nav} className="link-danger">
-        <Icons icon="trash" />
-      </a>
-    </div>, p);
-    return p;
+  rowRenderActions(cell, row, val) {
+    let rowData = this.jexcel.getRowData(row);
+    let div = document.createElement('div');
+    ReactDom.render(<div>
+      {val}
+      <div className="my-2">
+        <a href="#" onClick={(e) => this.rowOpenView(e, rowData[0])} className="link-info">
+          <Icons icon="eye" className="mr-2" />
+        </a>
+        <a href="#" onClick={(e) => this.rowGotoEdit(e, rowData[0])}>
+          <Icons icon="pencil-square-o" className="mr-2" />
+        </a>
+        <a href="#" onClick={(e) => this.rowDelete(e)} className="link-danger">
+          <Icons icon="trash" />
+        </a>
+      </div>
+    </div>, div);
+    cell.innerHTML = null;
+    cell.appendChild(div);
   }
 
   render() {
