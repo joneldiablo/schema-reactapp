@@ -16,8 +16,7 @@ export default class Section extends React.Component {
     if (typeof className === 'string') className = className.split(' ');
     className.push(this.constructor.name);
     className.push(this.constructor.name + '-' + name);
-    let cn = new Set(className);
-    className = Array.from(cn);
+    className = Array.from((new Set(className)));
     return <section className={className.join(' ')} id={this.id} style={style}>
       <Component {...attributes} sectionId={this.id}>
         {children}

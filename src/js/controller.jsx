@@ -6,9 +6,10 @@ import {
   Route,
 } from "react-router-dom";
 import { AnimatedSwitch } from 'react-router-transition';
+import importedComponent from 'react-imported-component';
 import urlJoin from "url-join";
+
 import { setSchema } from "./functions";
-import findComponent from "./find-component";
 import mapRoutes from "./map-routes";
 import Template from "./containers/template";
 import Page from "./containers/page";
@@ -19,6 +20,7 @@ export default class Controller extends React.Component {
 
   static defaultProps = {
     schema: { routes: [] },
+    components: {},
     Template,
     Page,
     Section
@@ -27,13 +29,6 @@ export default class Controller extends React.Component {
   state = {
     mapRoutes: mapRoutes(this.props.schema.routes),
     allRoutes: this.getRoutes(this.props.schema.routes)
-    /*
-modificar para usar la funcion de remplazo de referencias en todos lados, hacer que los objetos mezclen, usar elemento "ref" si es necesario....
-sections: this.resolveRefs(this.props.schema.sections),
-templates: this.resolveRefs(this.props.schema.templates),
-routes: this.resolveRefs(this.props.schema.routes),
-menus: this.resolveRefs(this.props.schema.menus),
-pages: this.resolveRefs(this.props.schema.pages), */
   }
 
   resolveRefs(item) {
@@ -47,7 +42,7 @@ pages: this.resolveRefs(this.props.schema.pages), */
             Object.assign(toReturn, this.resolveRefs(item[k]));
             toReturn['name'] = item[k].substring(1).split('.').pop();
           } else if (k === 'attributes') {
-            toReturn[k] = Object.assign(toReturn[k] || {}, this.resolveRefs(item[k]));
+            toReturn[k] = Object.assign({}, toReturn[k] || {}, this.resolveRefs(item[k]));
           }
           else toReturn[k] = this.resolveRefs(item[k])
         });
@@ -61,8 +56,17 @@ pages: this.resolveRefs(this.props.schema.pages), */
   }
 
   components({ type, from } = {}) {
-    //type name of componente which colud find with "findComponent", from is the path to component, is not working, some love here!!!
-    return withRouter(findComponent(type || from));
+    let Component =
+      this.props.components[type] ||
+      importedComponent(() => {
+        // use the template string (`...`) because "import" 
+        // function not working with variables
+        return import(`${type || from}`);
+      }, {
+        LoadingComponent: () => 'loading',
+        ErrorComponent: () => 'error'
+      })
+    return withRouter(Component);
   }
 
   componentWillMount() {

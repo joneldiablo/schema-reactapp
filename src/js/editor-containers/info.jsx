@@ -1,6 +1,6 @@
 import React from "react";
-import { randomS4 } from "../functions";
-import Icons from "../icons";
+import { randomS4 } from "dbl-components/lib/js/functions";
+import Icons from "dbl-components/lib/js/media/icons";
 
 export default class Info extends React.Component {
 
@@ -44,7 +44,9 @@ export default class Info extends React.Component {
           </div>
         </div>
       </div>
-      {children}
+      <div>
+        {children}
+      </div>
     </div>
   }
 }
