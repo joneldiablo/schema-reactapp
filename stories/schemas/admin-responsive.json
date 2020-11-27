@@ -78,7 +78,7 @@
   },
   "sections": {
     "header": {
-      "type": "navbar",
+      "type": "Navbar",
       "label": "Header",
       "description": "Header of site, always at top.",
       "icon": "navbar",
@@ -91,8 +91,14 @@
         "menuRight": "$menus.right"
       }
     },
+    "container": {
+      "type": "Container",
+      "label": "Container",
+      "description": "Wrap content of page.",
+      "icon": "content"
+    },
     "nav-list-cards": {
-      "type": "nav-list-cards",
+      "type": "CardListNavigation",
       "label": "Navication ist and cards",
       "description": "Menu as list when mobile, cards when desktop.",
       "icon": "menu"

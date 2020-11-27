@@ -3,12 +3,13 @@ import React from 'react';
 import { iconSet } from "dbl-components/lib/js/media/icons";
 import Navbar from "dbl-components/lib/js/navigation/navbar";
 import Container from "dbl-components/lib/js/containers/container";
-import ResizeContainer from "dbl-components/lib/js/containers/resize-container";
+import ResizeContainer from "dbl-components/lib/js/containers/auto-responsive-container";
 import FooterContainer from "dbl-components/lib/js/containers/footer-container";
 import CardsNavigation from "dbl-components/lib/js/navigation/cards-navigation";
 import SideNavigation from "dbl-components/lib/js/navigation/side-navigation";
 import JexcelTable from "dbl-components/lib/js/tables/jexcel-table";
-import ServiceListNavigation from "dbl-components/lib/js/navigation/service-list-navigation"
+import ServiceListNavigation from "dbl-components/lib/js/navigation/service-list-navigation";
+import CardListNavigation from "dbl-components/lib/js/navigation/card-list-navigation";
 import { HashRouterController } from "../src/js/controller";
 import { Template, Page, Section } from "../src/js/editor-containers";
 
@@ -27,6 +28,11 @@ const adminComponents = {
   JexcelTable,
   ServiceListNavigation
 };
+const mobileComponents = {
+  Navbar,
+  CardListNavigation,
+  Container
+}
 iconSet(require('../icons/selection.json'));
 
 export default {
@@ -38,9 +44,9 @@ export const AdminInit = () => <>
 </>
 
 export const AdminEditor = () => <>
-  <HashRouterController schema={schema} Template={Template} Page={Page} Section={Section} />
+  <HashRouterController schema={schema} components={adminComponents} Template={Template} Page={Page} Section={Section} />
 </>
 
 export const AdminMobileFirst = () => <>
-  <HashRouterController schema={schemaMF} />
+  <HashRouterController components={mobileComponents} schema={schemaMF} />
 </>

@@ -1,13 +1,14 @@
 {
   "name": "schema-reactapp",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Create a complete web application or website with a schema file, add components and more, in development!!!!",
   "main": "./lib/controller.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -s ./stories/assets -p 6006",
     "build-storybook": "build-storybook -o docs -s ./stories/assets",
-    "build": "./node_modules/.bin/babel src/js --out-dir lib --source-maps"
+    "clear": "rm -rf lib/*",
+    "build": "yarn clear && ./node_modules/.bin/babel src/js --out-dir lib --source-maps && yarn build-storybook"
   },
   "repository": {
     "type": "git",
